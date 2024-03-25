@@ -11,7 +11,7 @@ test.describe('Homepage', () => {
     test('Find text on homepage', async ({ page }) => {
         await page.goto('https://practice.sdetunicorns.com');
         // find text locator
-        const headingText = await page.locator('text=Think different. Make different.');
+        const headingText = page.locator('text=Think different. Make different.');
 
         // Assert heading text is visible
         await expect(headingText).toBeVisible();
@@ -28,7 +28,7 @@ test.describe('Homepage', () => {
     test('Verify home link is enabled using css selector and text', async ({ page }) => {
         await page.goto('https://practice.sdetunicorns.com');
         // find text locator
-        const homeText = await page.locator('#zak-primary-menu >> text=Home');
+        const homeText = page.locator('#zak-primary-menu >> text=Home');
 
         // Verify home text is enabled
         await expect(homeText).toBeEnabled();
@@ -37,7 +37,7 @@ test.describe('Homepage', () => {
     test('Verify search icon is visible using xpath selector', async ({ page }) => {
         await page.goto('https://practice.sdetunicorns.com');
         // find search Icon
-        const searchIcon = await page.locator('//*[@class="zak-header-actions zak-header-actions--desktop"]//*[@class="zak-header-search__toggle"]');
+        const searchIcon = page.locator('//*[@class="zak-header-actions zak-header-actions--desktop"]//*[@class="zak-header-search__toggle"]');
 
         // Verify search icon is visible
         await expect(searchIcon).toBeVisible();
@@ -46,5 +46,46 @@ test.describe('Homepage', () => {
         await searchIcon.click();
         // Verify search bar is visible
         await expect(page.locator('.zak-search-form').first()).toBeVisible();
+    })
+
+    test('Verify text of nav menu links', async ({ page }) => {
+        const expectedLinks = [
+            "Home",
+            "About",
+            "Shop",
+            "Blog",
+            "Contact",
+            "My account",
+        ]
+
+        await page.goto('https://practice.sdetunicorns.com');
+        // find nav menu Links
+        const navLinks = page.locator('#zak-primary-nav li[id*=menu]');
+
+        // print out all the links
+        for (const el of await navLinks.elementHandles()) {
+            console.log(await el.textContent());
+        };
+
+        // Verify nav menu links text
+        expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+    })
+
+    test('Fill contact form', async ({ page }) => {
+        await page.goto('https://practice.sdetunicorns.com/contact/');
+        
+        // find form on page and scroll to
+        const form = page.locator('#evf-form-277');
+        expect(form).toBeVisible();
+
+        // form.scrollIntoViewIfNeeded();
+        page.pause();
+        // fill Name input
+        await page.getByRole('').fill('test1')
+        
+
+
+        // Verify nav menu links text
+        // expect(await navLinks.allTextContents()).toEqual(expectedLinks);
     })
 })
