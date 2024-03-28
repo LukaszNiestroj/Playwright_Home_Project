@@ -72,20 +72,72 @@ test.describe('Homepage', () => {
     })
 
     test('Fill contact form', async ({ page }) => {
+        // Navigate to the page
         await page.goto('https://practice.sdetunicorns.com/contact/');
-        
-        // find form on page and scroll to
+    
+        // Wait for the page to load
+        // await page.waitForLoadState('networkidle');
+    
+        // Find the form on the page and scroll to it
         const form = page.locator('#evf-form-277');
-        expect(form).toBeVisible();
+        await form.scrollIntoViewIfNeeded();
+    
+        // Fill the input Name field
+        const nameField = form.locator('#evf-277-field_ys0GeZISRs-1');
+        await nameField.isVisible();
+        await nameField.fill('test1');
+    
+        // Fill the input email field
+        const emailField = form.locator('#evf-277-field_LbH5NxasXM-2');
+        await emailField.isVisible();
+        await emailField.fill('test1@test.com');
+    
+        // Fill the input Phone field
+        const phoneField = form.locator('#evf-277-field_66FR384cge-3');
+        await phoneField.isVisible();
+        await phoneField.fill('+48999654222');
+    
+        // Fill the input Message field
+        const messageField = form.locator('#evf-277-field_yhGx3FOwr2-4');
+        await messageField.isVisible();
+        await messageField.fill('test112233 ssaersw'); 
 
-        // form.scrollIntoViewIfNeeded();
-        page.pause();
-        // fill Name input
-        await page.getByRole('').fill('test1')
-        
+        // Click submit button
+        page.locator('#evf-submit-277').click();
 
+        // Wait for the page to load
+        await page.waitForLoadState('networkidle');
 
-        // Verify nav menu links text
-        // expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+        // Verify text after sumbit form
+        const submitFormText = page.locator('text=Thanks for contacting us! We will be in touch with you shortly');
+
+        // Assert submit Form Text is visible
+        await expect(submitFormText).toBeVisible();
     })
+
+    test('Count number of posts and check text length', async ({ page }) => {
+        // Navigate to the page
+        await page.goto('https://practice.sdetunicorns.com/blog');
+        
+        // Get the number of posts
+        const postCount = await page.locator('#recent-posts-3 ul > li a').count();
+        
+        // Assertion on the number of posts
+        expect(postCount).toBeGreaterThan(0);
+    
+        // Get the text of each post and check its length
+        for (let i = 0; i < postCount; i++) {
+            const postText = await page.locator('#recent-posts-3 ul > li a').nth(i).textContent();
+            if (postText) {
+                // Commented line is for show result of count the characters in console
+                
+                // const charCount = postText.length;
+                // console.log(`Post ${i+1} has ${charCount} characters.`);
+                // expect(charCount).toBeGreaterThan(10);
+                expect(postText.length).toBeGreaterThan(10);
+            }        
+        }
+    });
+    
+    
 })
