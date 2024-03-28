@@ -12,25 +12,11 @@ test.describe('Contact page', () => {
         const form = page.locator('.everest-form');
         await form.scrollIntoViewIfNeeded();
     
-        // Fill the input Name field
-        const nameField = form.locator('.contact-name input');
-        await nameField.isVisible();
-        await nameField.fill('test1');
-    
-        // Fill the input email field
-        const emailField = form.locator('.contact-email input');
-        await emailField.isVisible();
-        await emailField.fill('test1@test.com');
-    
-        // Fill the input Phone field
-        const phoneField = form.locator('.contact-phone input');
-        await phoneField.isVisible();
-        await phoneField.fill('+48999654222');
-    
-        // Fill the input Message field
-        const messageField = form.locator('.contact-message textarea');
-        await messageField.isVisible();
-        await messageField.fill('test112233 ssaersw'); 
+        // Fill the input fields
+        await page.locator('.contact-name input').fill('test1');
+        await page.locator('.contact-email input').fill('test1@test.com');
+        await page.locator('.contact-phone input').fill('+48999654222');
+        await page.locator('.contact-message textarea').fill('Test text.'); 
 
         // Click submit button
         page.locator('.evf-submit').click();

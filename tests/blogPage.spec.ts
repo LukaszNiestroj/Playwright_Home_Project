@@ -9,7 +9,7 @@ test.describe('Blog Page', () => {
         const postCount = await page.locator('#recent-posts-3 ul > li a').count();
         
         // Assertion on the number of posts
-        expect(postCount).toBeGreaterThan(0);
+        expect(postCount).toEqual(5);
     
         // Get the text of each post and check its length
         for (let i = 0; i < postCount; i++) {
