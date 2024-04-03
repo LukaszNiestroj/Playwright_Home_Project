@@ -1,19 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Pulpit tests', () => {
-  // Arrange
-  const userId = 'tester12';
-  const userPassword = 'test1234';
-  const expectedTransferUserName = 'Chuck Demobankowy';
-
-  const receiverId = '2';
-  const transferAmount = '1500';
-  const transferTitle = 'Fast food';
-  const topUpAmount = '50';
-  const topUpReceiver = '502 xxx xxx';
-
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
+    const userId = 'tester12';
+    const userPassword = 'test1234';
+
+    await page.goto('/');
     await page.getByTestId('login-input').fill(userId);
     await page.getByTestId('password-input').fill(userPassword);
     await page.getByTestId('login-button').click();
@@ -21,6 +13,13 @@ test.describe('Pulpit tests', () => {
   });
 
   test('Quick payment with correct data', async ({ page }) => {
+    // Arrange
+    const receiverId = '2';
+    const transferAmount = '1500';
+    const transferTitle = 'Fast food';
+    const expectedTransferUserName = 'Chuck Demobankowy';
+    const expectedMessage = `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`;
+
     // Act
     await page.locator('#widget_1_transfer_receiver').selectOption(receiverId);
     await page.locator('#widget_1_transfer_amount').fill(transferAmount);
@@ -29,11 +28,15 @@ test.describe('Pulpit tests', () => {
     await page.getByTestId('close-button').click();
 
     // Assert
-    const expectedMessage = `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`;
     await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 
   test('Mobile phone top-up', async ({ page }) => {
+    // Arange
+    const topUpAmount = '50';
+    const topUpReceiver = '502 xxx xxx';
+    const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
+
     // Act
     await page.locator('#widget_1_topup_receiver').selectOption(topUpReceiver);
     await page.locator('#widget_1_topup_amount').fill(topUpAmount);
@@ -46,7 +49,6 @@ test.describe('Pulpit tests', () => {
     await page.getByTestId('close-button').click();
 
     // Assert
-    const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
     await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 });
