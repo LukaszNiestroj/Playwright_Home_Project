@@ -5,11 +5,12 @@ test.describe('Pulpit tests', () => {
   const userId = 'tester12';
   const userPassword = 'test1234';
   const expectedTransferUserName = 'Chuck Demobankowy';
-
+  
   const receiverId = '2';
   const transferAmount = '1500';
   const transferTitle = 'Fast food';
-  const topupAmount = '50';
+  const topUpAmount = '50';
+  const topUpReceiver = '502 xxx xxx';
 
   test.beforeEach(async ({ page }) => {
     await page.goto('https://demo-bank.vercel.app/');
@@ -35,8 +36,8 @@ test.describe('Pulpit tests', () => {
 
   test('Mobile phone top-up', async ({ page }) => {
     // Act
-    await page.locator('#widget_1_topup_receiver').selectOption('502 xxx xxx');
-    await page.locator('#widget_1_topup_amount').fill(topupAmount);
+    await page.locator('#widget_1_topup_receiver').selectOption(topUpReceiver);
+    await page.locator('#widget_1_topup_amount').fill(topUpAmount);
 
     // Two option to catch input element
     // await page.locator('#uniform-widget_1_topup_agreement span').click();
@@ -47,7 +48,7 @@ test.describe('Pulpit tests', () => {
 
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(
-      `Doładowanie wykonane! ${topupAmount},00PLN na numer 502 xxx xxx`,
+      `Doładowanie wykonane! ${topUpAmount},00PLN na numer 502 xxx xxx`,
     );
   });
 });
