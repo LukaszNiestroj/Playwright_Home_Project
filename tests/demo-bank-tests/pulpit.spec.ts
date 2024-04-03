@@ -22,7 +22,11 @@ test.describe('Pulpit tests', () => {
     test('Mobile phone top-up', async ({ page }) => {
         await page.locator('#widget_1_topup_receiver').selectOption('502 xxx xxx');
         await page.locator('#widget_1_topup_amount').fill('50');
-        await page.locator('#uniform-widget_1_topup_agreement span').click();
+
+        // Two option to catch input element
+        // await page.locator('#uniform-widget_1_topup_agreement span').click();
+        await page.locator('#widget_1_topup_agreement').click();
+        
         await page.locator('#execute_phone_btn').click();
         await page.getByTestId('close-button').click();
 
