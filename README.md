@@ -1,10 +1,11 @@
 # Playwright_Home_Project
+
 Repository for playwright practice
 Installing a particular project
 
     Download the entire repository
     Unzip it and move it to the projects folder (e.g. Projects)
-    Navigate to the folder of the stage in question (you can open it in Visual Studio Code) 
+    Navigate to the folder of the stage in question (you can open it in Visual Studio Code)
     If there is a package.json file there, you can recreate the stage in question
 
     - run console in the stage directory
@@ -12,11 +13,11 @@ Installing a particular project
     - execute the command npx playwright install to download the current browsers
     - run npx playwright test
 
-
 # Test Automation training from jaktestowac.pl
 
 This is a Test Automation project based on `Playwright` and `TypeScript`.  
 The tested page is a simple demo of a bank.
+
 - [Links](#links)
 - [Commands](#commands)
 - [Visual Studio Code](#visual-studio-code)
@@ -27,7 +28,7 @@ The tested page is a simple demo of a bank.
 
 ## Links
 
-- test site https://demo-bank.vercel.app/  
+- test site https://demo-bank.vercel.app/
 - code repository https://github.com/LukaszNiestroj/Playwright_Home_Project.git
 
 ## Commands
