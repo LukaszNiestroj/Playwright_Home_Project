@@ -184,6 +184,8 @@ To quickly evaluate code use `DEBUG CONSOLE`.
     package-lock.json
     playwright-report
     test-results
+    README.md
+    package.json
 
     ```
 
