@@ -10,8 +10,7 @@ test.describe('User login to Demobank', () => {
   const incorrectPasswordId = 'test';
 
   test.beforeEach(async ({ page }) => {
-    const url = 'https://demo-bank.vercel.app/';
-    await page.goto(url);
+    await page.goto('/');
   });
 
   test('Login with correct credentials', async ({ page }) => {
