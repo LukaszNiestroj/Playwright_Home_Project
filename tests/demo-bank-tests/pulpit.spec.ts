@@ -28,9 +28,10 @@ test.describe('Pulpit tests', () => {
     await page.getByRole('button', { name: 'wykonaj' }).click();
     await page.getByTestId('close-button').click();
 
+    const expectedMessage = `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`;
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(
-      `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`,
+      expectedMessage,
     );
   });
 
@@ -46,9 +47,10 @@ test.describe('Pulpit tests', () => {
     await page.locator('#execute_phone_btn').click();
     await page.getByTestId('close-button').click();
 
+    const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(
-      `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`,
+      expectedMessage,
     );
   });
 });
