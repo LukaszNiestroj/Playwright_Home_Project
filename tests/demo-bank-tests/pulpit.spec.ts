@@ -28,11 +28,9 @@ test.describe('Pulpit tests', () => {
     await page.getByRole('button', { name: 'wykonaj' }).click();
     await page.getByTestId('close-button').click();
 
-    const expectedMessage = `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`;
     // Assert
-    await expect(page.locator('#show_messages')).toHaveText(
-      expectedMessage,
-    );
+    const expectedMessage = `Przelew wykonany! ${expectedTransferUserName} - ${transferAmount},00PLN - ${transferTitle}`;
+    await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 
   test('Mobile phone top-up', async ({ page }) => {
@@ -47,10 +45,8 @@ test.describe('Pulpit tests', () => {
     await page.locator('#execute_phone_btn').click();
     await page.getByTestId('close-button').click();
 
-    const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
     // Assert
-    await expect(page.locator('#show_messages')).toHaveText(
-      expectedMessage,
-    );
+    const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
+    await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 });
