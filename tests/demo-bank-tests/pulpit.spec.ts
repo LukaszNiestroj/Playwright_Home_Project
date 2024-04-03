@@ -5,7 +5,7 @@ test.describe('Pulpit tests', () => {
   const userId = 'tester12';
   const userPassword = 'test1234';
   const expectedTransferUserName = 'Chuck Demobankowy';
-  
+
   const receiverId = '2';
   const transferAmount = '1500';
   const transferTitle = 'Fast food';
@@ -48,7 +48,7 @@ test.describe('Pulpit tests', () => {
 
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(
-      `Doładowanie wykonane! ${topUpAmount},00PLN na numer 502 xxx xxx`,
+      `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`,
     );
   });
 });
