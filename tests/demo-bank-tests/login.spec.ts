@@ -22,19 +22,21 @@ test.describe('User login to Demobank', () => {
   });
 
   test('Unsuccessful login with too short username', async ({ page }) => {
+    // Act
     await page.getByTestId('login-input').fill('tester');
     await page.getByTestId('password-input').click();
-
+    // Assert
     await expect(page.getByTestId('error-login-id')).toHaveText(
       'identyfikator ma min. 8 znaków',
     );
   });
 
   test('Unsuccessful login with too short password', async ({ page }) => {
+    // Act
     await page.getByTestId('login-input').fill(userId);
     await page.getByTestId('password-input').fill('test');
     await page.getByTestId('password-input').blur();
-
+    // Assert
     await expect(page.getByTestId('error-login-password')).toHaveText(
       'hasło ma min. 8 znaków',
     );
