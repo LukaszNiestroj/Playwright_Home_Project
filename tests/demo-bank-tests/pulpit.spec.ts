@@ -51,4 +51,26 @@ test.describe('Pulpit tests', () => {
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
+
+  test('Correct balance after mobile phone top-up', async ({ page }) => {
+    // Arange
+    const topUpAmount = '50';
+    const topUpReceiver = '502 xxx xxx';
+    const initialBalance = await page.locator('#money_value').innerText();
+    const expectedBalance = Number(initialBalance) - Number(topUpAmount);
+
+    // Act
+    await page.locator('#widget_1_topup_receiver').selectOption(topUpReceiver);
+    await page.locator('#widget_1_topup_amount').fill(topUpAmount);
+
+    // Two option to catch input element
+    // await page.locator('#uniform-widget_1_topup_agreement span').click();
+    await page.locator('#widget_1_topup_agreement').click();
+
+    await page.locator('#execute_phone_btn').click();
+    await page.getByTestId('close-button').click();
+
+    // Assert
+    await expect(page.locator('#money_value')).toHaveText(`${expectedBalance}`);
+  });
 });
