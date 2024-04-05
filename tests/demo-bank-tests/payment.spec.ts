@@ -20,6 +20,7 @@ test.describe('Payment tests', () => {
     const transferAccount = '12 3456 7890 1234 5678 9012 34567';
     const transferAmount = '120';
     const expectedMessage = `Przelew wykonany! ${transferAmount},00PLN dla Jan Nowak`;
+
     // Act
     await page.getByTestId('transfer_receiver').fill(transferReceiver);
     await page.getByTestId('form_account_to').fill(transferAccount);
