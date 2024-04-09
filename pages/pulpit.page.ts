@@ -18,5 +18,7 @@ export class PulpitPage {
   topupPhone = this.page.locator('#execute_phone_btn');
 
   //Correct Balance
-  topupMoneyValue = this.page.locator('#money_value');
+  topupMoneyValueText = this.page.locator('#money_value');
+
+  userNameText = this.page.getByTestId('user-name');
 }

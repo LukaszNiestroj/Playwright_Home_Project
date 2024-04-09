@@ -60,13 +60,13 @@ test.describe('Pulpit tests', () => {
 
   test('Correct balance after mobile phone top-up', async ({ page }) => {
     // Arange
+    const pulpitPage = new PulpitPage(page);
     const topUpAmount = '50';
     const topUpReceiver = '502 xxx xxx';
-    const initialBalance = await page.locator('#money_value').innerText();
+    const initialBalance = await pulpitPage.topupMoneyValueText.innerText();
     const expectedBalance = Number(initialBalance) - Number(topUpAmount);
 
     // Act
-    const pulpitPage = new PulpitPage(page);
     await pulpitPage.topupReceiver.selectOption(topUpReceiver);
     await pulpitPage.topupAmount.fill(topUpAmount);
 
@@ -78,6 +78,8 @@ test.describe('Pulpit tests', () => {
     await pulpitPage.pulpitActionCloseButton.click();
 
     // Assert
-    await expect(pulpitPage.topupMoneyValue).toHaveText(`${expectedBalance}`);
+    await expect(pulpitPage.topupMoneyValueText).toHaveText(
+      `${expectedBalance}`,
+    );
   });
 });
