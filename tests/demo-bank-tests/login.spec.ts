@@ -49,4 +49,15 @@ test.describe('User login to Demobank', () => {
     // Assert
     await expect(loginPage.passwordError).toHaveText(expectedErrorMessage);
   });
+
+  test('Succesfull logout', async ({ page }) => {
+    //Arrange
+    const userId = loginData.userId;
+    const userPassword = loginData.password;
+    await loginPage.login(userId, userPassword);
+    //Act
+    await page.getByTestId('logout-button').click();
+    //Expect
+    await expect(page).toHaveURL('https://demo-bank.vercel.app/index.html');
+  });
 });
