@@ -40,13 +40,6 @@ test.describe('Pulpit tests', () => {
     // Act
     await pulpitPage.topUpTransfer(topUpReceiver, topUpAmount);
 
-    // Two option to catch input element
-    // await page.locator('#uniform-widget_1_topup_agreement span').click();
-    await pulpitPage.topupAgreement.click();
-
-    await pulpitPage.topupPhone.click();
-    await pulpitPage.pulpitActionCloseButton.click();
-
     // Assert
     await expect(pulpitPage.pulpitTransferMessage).toHaveText(expectedMessage);
   });
@@ -60,13 +53,6 @@ test.describe('Pulpit tests', () => {
 
     // Act
     await pulpitPage.topUpTransfer(topUpReceiver, topUpAmount);
-
-    // Two option to catch input element
-    // await page.locator('#uniform-widget_1_topup_agreement span').click();
-    await pulpitPage.topupAgreement.click();
-
-    await pulpitPage.topupPhone.click();
-    await pulpitPage.pulpitActionCloseButton.click();
 
     // Assert
     await expect(pulpitPage.topupMoneyValueText).toHaveText(

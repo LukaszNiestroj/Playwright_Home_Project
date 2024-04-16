@@ -43,5 +43,8 @@ export class PulpitPage {
   ): Promise<void> {
     await this.topupReceiver.selectOption(topUpReceiver);
     await this.topupAmount.fill(topUpAmount);
+    await this.topupAgreement.click();
+    await this.topupPhone.click();
+    await this.pulpitActionCloseButton.click();
   }
 }
