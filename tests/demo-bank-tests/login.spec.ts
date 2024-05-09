@@ -3,7 +3,7 @@ import { loginData } from '../../test-data/login.data';
 import { LoginPage } from '../../pages/login.page';
 import { PulpitPage } from '../../pages/pulpit.page';
 
-test.describe('User login to Demobank', () => {
+test.describe('User login to Demobank', { tag: '@login' }, () => {
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
@@ -11,18 +11,22 @@ test.describe('User login to Demobank', () => {
     loginPage = new LoginPage(page);
   });
 
-  test('Login with correct credentials', async ({ page }) => {
-    // Arrange
-    const userId = loginData.userId;
-    const userPassword = loginData.password;
-    const expectedUserName = 'Jan Demobankowy';
-    // Act
-    await loginPage.login(userId, userPassword);
+  test(
+    'Login with correct credentials',
+    { tag: '@smoke' },
+    async ({ page }) => {
+      // Arrange
+      const userId = loginData.userId;
+      const userPassword = loginData.password;
+      const expectedUserName = 'Jan Demobankowy';
+      // Act
+      await loginPage.login(userId, userPassword);
 
-    // Assert
-    const pulpitPage = new PulpitPage(page);
-    await expect(pulpitPage.userNameText).toHaveText(expectedUserName);
-  });
+      // Assert
+      const pulpitPage = new PulpitPage(page);
+      await expect(pulpitPage.userNameText).toHaveText(expectedUserName);
+    },
+  );
 
   test('Unsuccessful login with too short username', async ({ page }) => {
     // Arrange

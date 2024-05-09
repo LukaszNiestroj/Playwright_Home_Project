@@ -4,7 +4,7 @@ import { LoginPage } from '../../pages/login.page';
 import { PaymentPage } from '../../pages/payment.page';
 import { PulpitPage } from '../../pages/pulpit.page';
 
-test.describe('Payment tests', () => {
+test.describe('Payment tests', { tag: ['@payment', '@integration'] }, () => {
   let paymentPage: PaymentPage;
   test.beforeEach(async ({ page }) => {
     const userId = loginData.userId;

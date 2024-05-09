@@ -3,7 +3,7 @@ import { loginData } from '../../test-data/login.data';
 import { LoginPage } from '../../pages/login.page';
 import { PulpitPage } from '../../pages/pulpit.page';
 
-test.describe('Pulpit tests', () => {
+test.describe('Pulpit tests', { tag: ['@pulpit', '@integration'] }, () => {
   let pulpitPage: PulpitPage;
   test.beforeEach(async ({ page }) => {
     const userId = loginData.userId;
