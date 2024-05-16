@@ -44,9 +44,18 @@ test.describe('Upload File', () => {
     // click the submit button
     await page.locator('#upload_1').click();
 
+    //hardcoded sleep - wrong practice
+    // await page.waitForTimeout(5000);
+
+    //wait for condition
+    // await page
+    //   .locator('#wfu_messageblock_header_1_1')
+    //   .waitFor({ state: 'visible', timeout: 5000 });
+
     // assertion
     await expect(page.locator('#wfu_messageblock_header_1_1')).toContainText(
       'uploaded successfully',
+      { timeout: 5000 },
     );
   });
 });
