@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
+import HomePage from '../../pages/home.page';
 
 test.describe('Homepage', () => {
+  let homePage;
+
   test('Go to homepage and veryfi title', async ({ page }) => {
+    homePage = new HomePage(page);
     // go to homepage
     await page.goto('https://practice.sdetunicorns.com/');
     // Assert the tittle
